@@ -38,7 +38,7 @@ This gives 30 features total (10 properties x 3 statistics each: mean, SE, worst
 
 ## c. GitHub Repository Link
 
-**Repository:** [Your GitHub Repository Link Here]
+**Repository:** https://github.com/yasukovi1753/ml-classification-app
 
 **Repository Structure:**
 ```
@@ -90,7 +90,7 @@ All 5 models were trained on the same 80/20 stratified split with StandardScaler
 
 ## Streamlit Application
 
-**Deployed App Link:** [Your Streamlit App URL Here]
+**Deployed App Link:** https://ml-classification-app-mmagck28cetkq8tyu6gijh.streamlit.app
 
 ### App Features:
 1. **CSV Upload** — Upload custom test data in CSV format
@@ -104,7 +104,7 @@ All 5 models were trained on the same 80/20 stratified split with StandardScaler
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/yasukovi1753/ml-classification-app.git
 cd ml-classification-app
 
 # Install dependencies

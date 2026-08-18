@@ -2,37 +2,25 @@
 
 ## a. Problem Statement
 
-The goal of this project is to classify breast tumors as **malignant** or **benign** based on features extracted from digitized images of fine needle aspirate (FNA) of breast masses. Early and accurate diagnosis of breast cancer is critical for patient survival, and machine learning models can assist medical professionals in making faster, data-driven decisions. This project implements and compares 5 different ML classification algorithms to identify the most effective model for this task.
+Breast cancer remains one of the leading causes of mortality among women worldwide. Accurate classification of tumors as malignant or benign at an early stage can significantly improve treatment outcomes. In this project, the Breast Cancer Wisconsin (Diagnostic) dataset is used to build and compare five different machine learning classification models. The objective is to evaluate which classifier performs the best on this medical diagnosis task using six standard evaluation metrics.
 
 ---
 
 ## b. Dataset Description
 
+**Dataset:** Breast Cancer Wisconsin (Diagnostic)  
+**Source:** UCI Machine Learning Repository (also available as a built-in dataset in sklearn)
+
 | Property | Details |
 |----------|---------|
-| **Dataset Name** | Breast Cancer Wisconsin (Diagnostic) |
-| **Source** | UCI Machine Learning Repository / sklearn built-in |
-| **Total Instances** | 569 |
-| **Number of Features** | 30 (all numerical, real-valued) |
-| **Target Variable** | Diagnosis — Malignant (0) or Benign (1) |
-| **Class Distribution** | Malignant: 212 (37.3%), Benign: 357 (62.7%) |
-| **Train/Test Split** | 80/20 stratified split (455 train, 114 test) |
+| Total Instances | 569 |
+| Number of Features | 30 (all numerical) |
+| Target Variable | Diagnosis — Malignant (0) or Benign (1) |
+| Class Distribution | Malignant: 212 (37.3%), Benign: 357 (62.7%) |
+| Train/Test Split | 80/20 stratified (455 train, 114 test) |
+| Preprocessing | StandardScaler applied for feature normalization |
 
-**Feature Description:**
-The 30 features are computed from digitized images of FNA of breast masses. They describe characteristics of cell nuclei present in the image. For each of 10 real-valued properties, the mean, standard error (SE), and worst (largest) values are recorded:
-
-1. **Radius** — mean distance from center to perimeter points
-2. **Texture** — standard deviation of grayscale values
-3. **Perimeter** — perimeter of the cell nucleus
-4. **Area** — area of the cell nucleus
-5. **Smoothness** — local variation in radius lengths
-6. **Compactness** — (perimeter^2 / area) - 1.0
-7. **Concavity** — severity of concave portions of the contour
-8. **Concave Points** — number of concave portions of the contour
-9. **Symmetry** — symmetry of the cell nucleus
-10. **Fractal Dimension** — coastline approximation - 1
-
-This gives 30 features total (10 properties x 3 statistics each: mean, SE, worst).
+The dataset contains 30 real-valued features computed from digitized images of fine needle aspirate (FNA) of breast masses. These features describe various properties of the cell nuclei observed in the images. There are 10 base measurements — radius, texture, perimeter, area, smoothness, compactness, concavity, concave points, symmetry, and fractal dimension — and for each, three values are recorded: the mean, standard error, and the worst (i.e., largest) value. This gives a total of 30 features.
 
 ---
 
@@ -40,16 +28,20 @@ This gives 30 features total (10 properties x 3 statistics each: mean, SE, worst
 
 **Repository:** https://github.com/yasukovi1753/ml-classification-app
 
-**Repository Structure:**
+**Streamlit App:** https://ml-classification-app-mmagck28cetkq8tyu6gijh.streamlit.app
+
+Repository structure:
+
 ```
 ml-classification-app/
-├── app.py                  # Streamlit web application
-├── requirements.txt        # Python dependencies
-├── README.md               # This file
-├── test_data.csv           # Test dataset (114 samples)
+├── app.py                           # Streamlit web application
+├── requirements.txt                 # Python dependencies
+├── README.md                        # Project documentation
+├── test_data.csv                    # Test dataset (114 samples)
 └── model/
-    ├── train_models.py     # Model training script
-    ├── logistic_regression.pkl
+    ├── ML_Assignment2_Models.ipynb  # Jupyter Notebook (model training + evaluation)
+    ├── train_models.py              # Python script version
+    ├── logistic_regression.pkl      # Saved trained models
     ├── decision_tree.pkl
     ├── knn.pkl
     ├── naive_bayes.pkl
@@ -61,70 +53,48 @@ ml-classification-app/
 
 ## d. Models Used
 
-### Model Comparison Table
+Five classification models were trained on the same training set (455 samples) using StandardScaler for normalization. All six evaluation metrics were computed on the test set (114 samples).
 
-All 5 models were trained on the same 80/20 stratified split with StandardScaler normalization. The following 6 evaluation metrics were calculated on the test set (114 samples):
+### Comparison Table
 
 | **ML Model Name** | **Accuracy** | **AUC** | **Precision** | **Recall** | **F1** | **MCC** |
 |---|---|---|---|---|---|---|
 | **Logistic Regression** | 0.9825 | 0.9954 | 0.9861 | 0.9861 | 0.9861 | 0.9623 |
 | **Decision Tree** | 0.9211 | 0.9163 | 0.9565 | 0.9167 | 0.9362 | 0.8341 |
-| **K-Nearest Neighbors** | 0.9561 | 0.9788 | 0.9589 | 0.9722 | 0.9655 | 0.9054 |
-| **Naive Bayes (Gaussian)** | 0.9298 | 0.9868 | 0.9444 | 0.9444 | 0.9444 | 0.8492 |
+| **kNN** | 0.9561 | 0.9788 | 0.9589 | 0.9722 | 0.9655 | 0.9054 |
+| **Naive Bayes** | 0.9298 | 0.9868 | 0.9444 | 0.9444 | 0.9444 | 0.8492 |
 | **Random Forest (Ensemble)** | 0.9561 | 0.9939 | 0.9589 | 0.9722 | 0.9655 | 0.9054 |
 
----
-
-### Model Observations
+### Observations
 
 | **ML Model Name** | **Observation about model performance** |
 |---|---|
-| **Logistic Regression** | Delivered the highest accuracy (98.25%) and best MCC (0.9623) among all models. With only 1 false positive and 1 false negative, it demonstrates that a simple linear boundary is highly effective for this dataset. The high AUC of 0.9954 confirms strong discriminative ability across all thresholds. This suggests the classes are nearly linearly separable in the scaled feature space. |
-| **Decision Tree** | Recorded the lowest accuracy (92.11%) and AUC (0.9163), with 9 misclassifications total. The model is prone to overfitting on training data and struggles with generalization despite using max_depth=5 as a regularization measure. Its recall of 0.9167 indicates it misses some benign cases. Decision boundaries based on axis-aligned splits are less effective for this dataset's feature interactions. |
-| **K-Nearest Neighbors** | Achieved 95.61% accuracy with balanced precision (0.9589) and recall (0.9722). KNN benefits significantly from StandardScaler normalization since it relies on distance calculations. With k=5, it captures local patterns effectively. The AUC of 0.9788 shows good ranking capability. Performance is competitive with Random Forest, indicating that local neighborhood information is useful for this classification task. |
-| **Naive Bayes (Gaussian)** | Achieved 92.98% accuracy, slightly above Decision Tree. Despite assuming feature independence (which does not hold for this dataset since mean, SE, and worst features are correlated), it performs reasonably well. The high AUC of 0.9868 shows that its probability estimates capture class separation effectively even though hard predictions have more errors. This aligns with the known robustness of Naive Bayes to violated independence assumptions. |
-| **Random Forest (Ensemble)** | Matched KNN in accuracy (95.61%) and achieved the second-highest AUC (0.9939). As an ensemble of 100 decision trees, it overcomes the single Decision Tree's overfitting problem through bagging and feature randomization. The near-perfect AUC demonstrates excellent ranking ability. However, its hard classification accuracy does not surpass Logistic Regression, suggesting that for this relatively clean, linearly-separable dataset, ensemble complexity does not always translate to better predictions. |
-| **Overall Winner for this dataset?** | **Logistic Regression** is the clear winner with the highest Accuracy (0.9825), F1 (0.9861), and MCC (0.9623). Its superior performance indicates that the breast cancer features, after scaling, form a nearly linearly separable space. Logistic Regression also offers the advantages of interpretability (feature coefficients can indicate which measurements matter most) and computational efficiency. For clinical deployment, its combination of high accuracy, strong AUC, and model simplicity makes it the most suitable choice. |
+| **Logistic Regression** | This model performed the best overall with 98.25% accuracy. It only misclassified 2 samples out of 114 — one false positive and one false negative. The MCC of 0.9623 is the highest among all models, which shows it handles both classes well despite the class imbalance. The strong performance makes sense because after scaling, the features seem to create a clear separation between malignant and benign cases, so a linear decision boundary works really well here. |
+| **Decision Tree** | Decision Tree gave the weakest results with 92.11% accuracy and the lowest AUC (0.9163). It misclassified 9 test samples. Even with max_depth set to 5 to prevent overfitting, it still struggled compared to other models. The main issue is that Decision Tree makes axis-aligned splits, and this dataset has correlated features (like mean and worst values of the same property), so a single tree cannot capture those relationships as effectively. |
+| **kNN** | KNN achieved 95.61% accuracy, performing on par with Random Forest. Since KNN works based on distance between data points, the StandardScaler normalization was crucial here — without it, features with larger ranges like area would dominate the distance calculation. With k=5, the model balances between being too sensitive to noise (low k) and losing local patterns (high k). Its recall of 0.9722 means it correctly identified most benign cases. |
+| **Naive Bayes** | Naive Bayes scored 92.98% accuracy. The Gaussian variant was used since all 30 features are continuous. Interestingly, even though the independence assumption is clearly violated here (mean radius, SE of radius, and worst radius are obviously correlated), the model still performs reasonably. What stood out is its AUC of 0.9868 — much higher than Decision Tree — which means the probability scores it outputs rank samples well, even if the final hard predictions are not as accurate. |
+| **Random Forest (Ensemble)** | Random Forest matched KNN in accuracy (95.61%) and had the second-highest AUC at 0.9939. Being an ensemble of 100 trees, it avoids the overfitting problem seen with a single Decision Tree. Each tree is trained on a random subset of features and samples, so the combined prediction is much more stable. However, even with this added complexity, it could not beat Logistic Regression on accuracy, which suggests that adding more model complexity is not always beneficial when the data is already well-separable. |
+| **Overall Winner for this dataset?** | **Logistic Regression** wins on this dataset. It has the best Accuracy (0.9825), F1 (0.9861), and MCC (0.9623). Random Forest comes close in AUC (0.9939 vs 0.9954) but falls short on actual classification accuracy. The reason Logistic Regression works so well is that the breast cancer features, once normalized, form two groups that can be separated almost perfectly by a straight line (linear boundary). On top of performance, Logistic Regression is also faster to train and easier to interpret — the model coefficients directly tell us which features contribute most to the diagnosis. |
 
 ---
 
-## Streamlit Application
+## Streamlit App Features
 
-**Deployed App Link:** https://ml-classification-app-mmagck28cetkq8tyu6gijh.streamlit.app
-
-### App Features:
-1. **CSV Upload** — Upload custom test data in CSV format
-2. **Model Selection** — Dropdown to select any of the 5 ML models
-3. **Evaluation Metrics** — Displays Accuracy, AUC, Precision, Recall, F1, and MCC
-4. **Confusion Matrix & Classification Report** — Visual heatmap and detailed per-class metrics
+1. **Dataset upload option (CSV)** — Users can upload a test CSV file through the sidebar
+2. **Model selection dropdown** — Dropdown menu to select any of the 5 trained models
+3. **Display of evaluation metrics** — All 6 metrics shown as metric cards + comparison table
+4. **Confusion matrix and classification report** — Heatmap confusion matrix + per-class metrics
 
 ---
 
 ## How to Run Locally
 
 ```bash
-# Clone the repository
 git clone https://github.com/yasukovi1753/ml-classification-app.git
 cd ml-classification-app
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Train models (generates .pkl files and test_data.csv)
 cd model
 python train_models.py
 cd ..
-
-# Run the Streamlit app
 streamlit run app.py
 ```
-
----
-
-## Technologies Used
-
-- **Python 3.10+**
-- **scikit-learn** — ML model training and evaluation
-- **Streamlit** — Interactive web application
-- **Pandas & NumPy** — Data processing
-- **Matplotlib & Seaborn** — Visualizations

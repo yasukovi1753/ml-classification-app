@@ -1,5 +1,11 @@
 # Breast Cancer Wisconsin - Classification using Machine Learning
 
+**ML Assignment 2**  
+**Name:** Yasaswini Kovi  
+**BITS ID:** 2025AD05009
+
+---
+
 ## a. Problem Statement
 
 Breast cancer remains one of the leading causes of mortality among women worldwide. Accurate classification of tumors as malignant or benign at an early stage can significantly improve treatment outcomes. In this project, the Breast Cancer Wisconsin (Diagnostic) dataset is used to build and compare five different machine learning classification models. The objective is to evaluate which classifier performs the best on this medical diagnosis task using six standard evaluation metrics.

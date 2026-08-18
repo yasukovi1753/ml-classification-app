@@ -34,7 +34,7 @@ The dataset contains 30 real-valued features computed from digitized images of f
 
 **Repository:** https://github.com/yasukovi1753/ml-classification-app
 
-**Streamlit App:** https://ml-classification-app-mmagck28cetkq8tyu6gijh.streamlit.app
+**Streamlit App:** https://ml-classification-app-mmagck28cetkg8byu6giih.streamlit.app
 
 Repository structure:
 

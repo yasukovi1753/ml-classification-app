@@ -36,6 +36,9 @@ st.set_page_config(
 
 st.title("🔬 Breast Cancer Wisconsin - Classification Dashboard")
 st.markdown("""
+**ML Assignment 2**  
+**Name:** Yasaswini Kovi | **BITS ID:** 2025AD05009
+
 This application compares **5 Machine Learning models** on the 
 **Breast Cancer Wisconsin (Diagnostic)** dataset.  
 Upload your test CSV or use the built-in test split to explore model performance.
@@ -264,7 +267,7 @@ with st.expander("📋 Dataset Information"):
 st.divider()
 st.markdown(
     "<p style='text-align:center; color:gray;'>"
-    "ML Assignment 2 | Breast Cancer Classification Dashboard"
+    "ML Assignment 2 | Yasaswini Kovi (2025AD05009) | Breast Cancer Classification Dashboard"
     "</p>",
     unsafe_allow_html=True,
 )
